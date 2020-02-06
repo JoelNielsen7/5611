@@ -43,7 +43,7 @@ float y_damp_max = -0.2;
 int floor = 50;
 
 PVector accel = new PVector(0, 10, 0);
-PVector origin = new PVector(-155, -69, 0);
+PVector origin = new PVector(0, 0, 0);
 
 PVector sphere = new PVector(-120, -100, -40);
 
@@ -66,7 +66,7 @@ void setup() {
  //noStroke(); //Question: What does this do?
   cam = new PeasyCam(this, 0, 0, 0, 250);
   //cam.rotateX(PI/6);
-  cam.rotateY(PI/6);
+  //cam.rotateY(PI/6);
   //cam.rotateZ(PI/4);
   //cam = new PeasyCam(this, -170, 60, 0, 300);
   cam.setMinimumDistance(50);
@@ -149,18 +149,33 @@ void moveParticles(float dt){
 void drawBackground(){
   //background(12, 42, 89);
   //background(0, 0, 0);
-  background(125, 123, 121);
-  fill(125, 167, 232);
-  pushMatrix();
-  translate(0, floor, 0);
-  rotateX(PI/2);
-  rect(-1000, -1000, 2000, 2000);
-  popMatrix();
-  fill(62, 122, 51);
-  pushMatrix();
-  rotateZ(PI/4);
-  rect(-170, 60, 20, 50);
-  popMatrix();
+  //background(125, 123, 121);
+  //fill(125, 167, 232);
+  //pushMatrix();
+  //translate(0, floor, 0);
+  //rotateX(PI/2);
+  //rect(-1000, -1000, 2000, 2000);
+  //popMatrix();
+  //fill(62, 122, 51);
+  //pushMatrix();
+  //rotateZ(PI/4);
+  //rect(-170, 60, 20, 50);
+  //popMatrix();
+  
+  int x = 50;
+  int y = 90;
+  float w = 1000;
+  float h = 1000;
+  color c1 = color(204, 102, 0);
+  color c2 = color(0, 102, 153);
+  noFill();
+
+  for (int i = 0; i <= h; i++) {
+    float inter = map(i, y, y+h, 0, 1);
+    color c = lerpColor(c1, c2, inter);
+    stroke(c);
+    line(x, i, x+w, i);
+  }
 }
 
 void drawParticles(){
@@ -187,87 +202,94 @@ void drawParticles(){
   }
 }
 
-void drawSphere(){
-  noStroke();
-  fill(227, 120, 14);
-  //translate(58, 48, 0);
-  if(w_press){
-    sphere.y -= 2; 
-  }
-  else if (s_press){
-   sphere.y += 2; 
-  }
-  else if (a_press){
-    sphere.z += 2;
-  }
-  else if (d_press){
-    sphere.z -= 2;
-  }
-  else if (q_press){
-    sphere.x -= 2;
-  }
-  else if (e_press){
-    sphere.x += 2;
-  }
-  translate(sphere.x, sphere.y, sphere.z);
-  sphere(sphere_radius);
+
+void drawBase(){
+  
+  
 }
 
-void keyPressed() {
-  if (key == 'w') {
-    w_press = true;
-  }
-  else if (key == 's'){
-    s_press = true;
-  }
-  else if (key == 'a'){
-    a_press = true;
-  }
-  else if (key == 'd'){
-    d_press = true;
-  }
-  else if (key == 'q'){
-    q_press = true;
-  }
-  else if (key == 'e'){
-    e_press = true;
-  }
-}
 
-void keyReleased() {
-  if (key == 'w') {
-    w_press = false;
-  }
-  else if (key == 's'){
-    s_press = false;
-  }
-  else if (key == 'a'){
-    a_press = false;
-  }
-  else if (key == 'd'){
-    d_press = false;
-  }
-  else if (key == 'q'){
-    q_press = false;
-  }
-  else if (key == 'e'){
-    e_press = false;
-  }
-}
+//void drawSphere(){
+//  noStroke();
+//  fill(227, 120, 14);
+//  //translate(58, 48, 0);
+//  if(w_press){
+//    sphere.y -= 2; 
+//  }
+//  else if (s_press){
+//   sphere.y += 2; 
+//  }
+//  else if (a_press){
+//    sphere.z += 2;
+//  }
+//  else if (d_press){
+//    sphere.z -= 2;
+//  }
+//  else if (q_press){
+//    sphere.x -= 2;
+//  }
+//  else if (e_press){
+//    sphere.x += 2;
+//  }
+//  translate(sphere.x, sphere.y, sphere.z);
+//  sphere(sphere_radius);
+//}
+
+//void keyPressed() {
+//  if (key == 'w') {
+//    w_press = true;
+//  }
+//  else if (key == 's'){
+//    s_press = true;
+//  }
+//  else if (key == 'a'){
+//    a_press = true;
+//  }
+//  else if (key == 'd'){
+//    d_press = true;
+//  }
+//  else if (key == 'q'){
+//    q_press = true;
+//  }
+//  else if (key == 'e'){
+//    e_press = true;
+//  }
+//}
+
+//void keyReleased() {
+//  if (key == 'w') {
+//    w_press = false;
+//  }
+//  else if (key == 's'){
+//    s_press = false;
+//  }
+//  else if (key == 'a'){
+//    a_press = false;
+//  }
+//  else if (key == 'd'){
+//    d_press = false;
+//  }
+//  else if (key == 'q'){
+//    q_press = false;
+//  }
+//  else if (key == 'e'){
+//    e_press = false;
+//  }
+//}
 
 
 void draw() {
   float dt = 0.1;
   float startFrame = millis();
-  spawnParticles(dt);
+  //spawnParticles(dt);
   //Compute the physics update
-  moveParticles(dt); 
+  //moveParticles(dt); 
   float endPhysics = millis();
   
   //Draw the scene
   drawBackground();
-  drawParticles();
-  drawSphere();
+  //drawParticles();
+  //drawBase();
   float endFrame = millis();
   
   String runtimeReport = "Frame: "+str(endFrame-startFrame)+"ms,"+
