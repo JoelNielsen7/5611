@@ -10,7 +10,7 @@ import peasy.*;
 // If you are new to processing, you can find an excellent tutorial that will quickly
 // introduce the key features here: https://processing.org/tutorials/p3d/
 
-String projectTitle = "Particle System";
+String projectTitle = "Water";
 
 //Animation Principle: Store object & world state in external variables that are used by both
 //                     the drawing code and simulation code.
@@ -23,7 +23,7 @@ ArrayList<Boolean> bounced = new<Boolean> ArrayList();
 
 
 
-float genRate = 1800; 
+float genRate = 1700; 
 float spawn_radius = 2;
 int x_vel_low = 20;
 int x_vel_high = 30;
@@ -102,7 +102,7 @@ void spawnParticles(float dt){
 
 
 void moveParticles(float dt){
-  //println(positions.size());
+  println(positions.size());
   //ArrayList<Integer> removes = new<Integer> ArrayList();
   int tmp = positions.size();
   for(int i = 0; i < tmp; i++){

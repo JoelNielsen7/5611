@@ -12,7 +12,7 @@ ArrayList<PVector> colors = new ArrayList<PVector>();
 ArrayList<Float> lifespans = new<Float> ArrayList();
 
 PVector normal = new PVector(0,0,0);
-float genRate = 1500; 
+float genRate = 1200; 
 float spawn_radius = 60;
 int x_vel_low = -5;
 int x_vel_high = 5;
@@ -42,7 +42,7 @@ PVector sphere = new PVector(508, 550, 0);
 void setup() {
   //size(1000, 1000);
   size(1000, 1000, P3D);
-  //cam = new PeasyCam(this, 500, 500, 0,300);
+  cam = new PeasyCam(this, 500, 500, 0,300);
   //cam.setMinimumDistance(50);
   //cam.setMaximumDistance(1000);
 
@@ -232,7 +232,7 @@ void drawSphere(){
   fill(0, 0, 255);
   pushMatrix();
   translate(sphere.x, sphere.y, sphere.z);
-  sphere(sphere_radius);
+  //sphere(sphere_radius);
   popMatrix();
 }
 
