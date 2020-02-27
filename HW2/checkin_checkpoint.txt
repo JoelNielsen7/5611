@@ -1,0 +1,114 @@
+//Triple Spring (damped) - 1D Motion
+//CSCI 5611 Thread Sample Code
+// Stephen J. Guy <sjguy@umn.edu>
+
+//Create Window
+void setup() {
+  size(400, 500, P3D);
+  surface.setTitle("Ball on Spring!");
+  for(int i = 0; i < numX; i++){
+   //posY[i] = stringTopY + ((i+1)*(restLen+10));
+   //posX[i] = stringTopX;
+   posY[i] = stringTopY;
+   posX[i] = stringTopX - ((i+1)*(restLen+20));
+
+  }
+  posX[0] = stringTopX;
+
+
+}
+
+//Simulation Parameters
+float floor = 500;
+float gravity = 10;
+float radius = 10;
+float stringTopX = 200;
+float stringTopY = 50;
+float restLen = 60;
+float mass = 1; //TRY-IT: How does changing mass affect resting length?
+float k = 2000; //TRY-IT: How does changing k affect resting length?
+float kv = 300;
+//float kv = 120;
+int numX = 10;
+
+
+float[] posY = new float[numX];
+float[] velY = new float[numX];
+float[] forces = new float[numX];
+
+
+float[] posX = new float[numX];
+float[] velX = new float[numX];
+
+float[] velXNew = new float[numX];
+float[] velYNew = new float[numX];
+//Inital positions and velocities of masses
+
+
+void update(float dt){
+  float xlen = 0, ylen = 0, len = 0, force = 0, dirX = 0, dirY = 0, aX= 0, aY=0;
+
+  velX = velXNew;
+  velY = velYNew;
+
+  for(int i = 0; i < numX -1; i++){
+    xlen = posX[i+1] - posX[i];
+    ylen = posY[i+1] - posY[i];
+
+    len = sqrt(xlen*xlen + ylen*ylen);
+    //force = -k*(len-restLen);
+    dirX = xlen/len;
+    dirY = ylen/len;
+
+    float v1 = (dirX*velX[i]) + (dirY*velY[i]);
+    float v2 = (dirX*velX[i+1]) + (dirY*velY[i+1]);
+
+    force = (-k*(restLen - len)) - (kv*(v1-v2));
+    println(force);
+
+    velXNew[i] += force*dirX*dt;
+    velYNew[i] += force*dirY*dt;
+
+    velXNew[i+1] -= force*dirX*dt;
+    velYNew[i+1] -= force*dirY*dt;
+  }
+  velXNew[0] = 0;
+    velYNew[0] = 0;
+  for(int j = 1; j < numX; j++){
+    velYNew[j] += gravity;
+    posX[j] += velXNew[j]*dt;
+    posY[j] += velYNew[j]*dt;
+  }
+
+  }
+
+//Draw the scene: one sphere per mass, one line connecting each pair
+void draw() {
+  background(255,255,255);
+  //for(int i = 0; i < 10; i++){
+  //update(.001); //We're using a fixed, large dt -- this is a bad idea!!
+  //}
+  for (int i = 0; i < 10; i++){
+    update(1/(10.0*frameRate));
+  }
+  fill(0,0,0);
+
+  for (int i = 0; i < numX; i++){
+    if (i == 0){
+      pushMatrix();
+    line(stringTopX,stringTopY,posX[0],posY[0]);
+    translate(posX[0],posY[0]);
+    sphere(radius);
+    popMatrix();
+    }
+     else{
+       pushMatrix();
+        line(posX[i-1],posY[i-1],posX[i],posY[i]);
+        translate(posX[i],posY[i]);
+        sphere(radius);
+        popMatrix();
+
+     }
+
+  }
+}

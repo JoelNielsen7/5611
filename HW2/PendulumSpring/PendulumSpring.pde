@@ -21,7 +21,7 @@ void setup() {
 //posX[3] = 200;
 //posY[2] = 300;
 
-velX[0] = 500;
+velX[0] = 5000;
 //posY[3] = 350;
 //posY[4] = 400;
 }
@@ -172,7 +172,7 @@ void update(float dt){
   
   float projVel = (velX[0]*dirX) + (velY[0]*dirY);
   
-  print("ProJ:", projVel);
+  //print("ProJ:", projVel);
   
   float tmpProjVel = projVel;
   
@@ -185,6 +185,8 @@ void update(float dt){
   //float springForceX = (force + dampF)* dirX;
   
   //float springForceY = (force + dampF)* dirY;
+  //float dampFX = 0;
+  //float dampFY = 0;
   float springForceX = (force + dampFX)* dirX;
   
   float springForceY = (force + dampFY)* dirY;
@@ -221,7 +223,7 @@ void update(float dt){
     
     springForceY = (force + dampFY)* dirY;
     
-    print("X, Y", springForceX, springForceY);
+    //print("X, Y", springForceX, springForceY);
     
     
     velX[i] += (springForceX/mass)*dt;
