@@ -330,9 +330,9 @@ void draw() {
 
 void keyPressed() {
   if(key == 'z'){
-    print("Z pressed");
+    //print("Z pressed");
     draw_points = !draw_points;
-    print(draw_points);
+    //print(draw_points);
   }
   if (key == 'x' ) draw_lines = !draw_lines;
   
